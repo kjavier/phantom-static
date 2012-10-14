@@ -1,6 +1,10 @@
 require 'phantom-static/config'
+require 'phantom-static/builder'
+
 require 'json'
 require 'open3'
+
+require 'active_support/all'
 
 module PhantomStatic
 
