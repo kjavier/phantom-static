@@ -11,10 +11,18 @@ module PhantomStatic
 
     attr_accessor :border
 
+    attr_accessor :output
+
     def self.build(&block)
       base = self.new
 
       yield base
+
+      base
+    end
+
+    def initialize()
+      self.output = :png
     end
 
     # Settings for formatish paper size

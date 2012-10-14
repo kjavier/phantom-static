@@ -1,8 +1,10 @@
 require 'phantom-static/config'
 require 'phantom-static/builder'
+require 'phantom-static/runner'
 
 require 'json'
 require 'open3'
+require 'fileutils'
 
 require 'active_support/all'
 
@@ -47,9 +49,21 @@ module PhantomStatic
     args = [bin, bridge_path, webpage, output, options.to_json]
 
     Open3.popen3(*args) do |stdin, stdout, stderr, thread|
-
-
     end
-    puts "Finished!"
+  end
+
+  def self.generate_random_file(format = :png)
+    FileUtils.mkdir_p(config.temp_directory) unless Dir.exists?(config.temp_directory)
+
+    file = nil
+    while (file.nil? || File.exists?(file))
+      file = "#{config.temp_directory}/#{SecureRandom.hex(5)}#{Time.now.to_i}.#{format}"
+    end
+
+    file
+  end
+
+  def self.as_file(webpage, &block)
+    Runner.as_file(webpage, &block)
   end
 end
