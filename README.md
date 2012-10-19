@@ -1,6 +1,6 @@
 # Phantom Static
 
-A library for obtaining static items from PhantomJS, such as images or a PDF document.
+A library for obtaining static items from [PhantomJS](https://github.com/ariya/phantomjs), such as images or a PDF document.
 
 ```ruby
 
