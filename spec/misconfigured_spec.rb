@@ -14,6 +14,10 @@ describe PhantomStatic do
       tmp_file = "/tmp/phantom-static_spec#{Time.now.to_i}.jpg"
       lambda { PhantomStatic.bridge_invoke("http://google.com", "")}.should raise_error
     end
+
+    after(:each) do
+      PhantomStatic.config = PhantomStatic::Config.new
+    end
   end
 
 end

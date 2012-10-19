@@ -14,9 +14,12 @@ module PhantomStatic
     attr_accessor :output
 
     def self.build(&block)
-      base = self.new
+      base = PhantomStatic.config.default_config || self.new
 
-      yield base
+      begin
+        yield base
+      rescue
+      end
 
       base
     end
@@ -91,6 +94,8 @@ module PhantomStatic
       @height = val
     end
     # 
+
+    # Query points used by Runner
 
     def paper_size_options
       if format.present?

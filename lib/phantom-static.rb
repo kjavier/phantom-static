@@ -4,7 +4,7 @@ require 'phantom-static/runner'
 
 require 'json'
 require 'open3'
-require 'fileutils'
+require 'tempfile'
 
 require 'active_support/all'
 
@@ -13,6 +13,10 @@ module PhantomStatic
   def self.config
     @config ||= Config.new
     @config
+  end
+
+  def self.config=(val)
+    @config = val
   end
 
   def self.configure(&block)
@@ -53,17 +57,14 @@ module PhantomStatic
   end
 
   def self.generate_random_file(format = :png)
-    FileUtils.mkdir_p(config.temp_directory) unless Dir.exists?(config.temp_directory)
-
-    file = nil
-    while (file.nil? || File.exists?(file))
-      file = "#{config.temp_directory}/#{SecureRandom.hex(5)}#{Time.now.to_i}.#{format}"
-    end
-
-    file
+    Tempfile.new(["file",".#{format.to_s}"])
   end
 
   def self.as_file(webpage, &block)
     Runner.as_file(webpage, &block)
+  end
+
+  def self.as_str(webpage, &block)
+    Runner.as_str(webpage, &block)
   end
 end
