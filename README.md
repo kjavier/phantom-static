@@ -2,6 +2,16 @@
 
 A library for obtaining static items from PhantomJS, such as images or a PDF document.
 
+```ruby
+
+# use default options
+file = PhantomStatic.as_file "http://google.com"
+
+string = PhantomStatic.as_string "http://google.com" do |o|
+  o.output = :pdf
+end
+```
+
 # Requirements
 
 * PhantomJS binary
