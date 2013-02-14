@@ -40,8 +40,12 @@ module PhantomStatic
     return nil
   end
 
+  def self.js_support_path
+    File.expand_path File.join(File.dirname(__FILE__), "phantom-static", "support")
+  end
+
   def self.bridge_path
-    File.expand_path File.join(File.dirname(__FILE__), "phantom-static", "support", "bridge.js")
+    File.expand_path File.join(js_support_path, "bridge.js")
   end
 
   def self.bridge_invoke(webpage, output, options = {})
@@ -53,6 +57,7 @@ module PhantomStatic
     args = [bin, bridge_path, webpage, output, options.to_json]
 
     Open3.popen3(*args) do |stdin, stdout, stderr, thread|
+      #puts stdout.read()
     end
   end
 

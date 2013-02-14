@@ -61,13 +61,13 @@ module PhantomStatic
     end
 
     def landscape
-      self.format = "A4" if self.format.nil?
+      self.A3
       self.orientation = "landscape"
       self
     end
 
     def portrait
-      self.format = "A4" if self.format.nil?
+      self.A4
       self.orientation = "portrait"
       self
     end
@@ -93,6 +93,16 @@ module PhantomStatic
       self.format = nil
       @height = val
     end
+
+    def custom_data=(val)
+      @custom_data = val
+    end
+
+    def custom_data
+      @custom_data ||= nil
+      @custom_data
+    end
+
     # 
 
     # Query points used by Runner
@@ -134,8 +144,11 @@ module PhantomStatic
       opts[:"paperSize"] = paper_size unless paper_size.nil?
       opts[:"viewportSize"] = view_port unless view_port.nil?
       opts[:"zoomFactor"] = self.zoom_factor unless self.zoom_factor.nil?
+      opts[:"custom_data"] = self.custom_data unless self.custom_data.nil?
 
       opts
     end
+
+
   end
 end
