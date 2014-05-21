@@ -145,7 +145,6 @@ module PhantomStatic
       opts[:"viewportSize"] = view_port unless view_port.nil?
       opts[:"zoomFactor"] = self.zoom_factor unless self.zoom_factor.nil?
       opts[:"custom_data"] = self.custom_data unless self.custom_data.nil?
-      opts[:"ignoreSslErrors"] = true
 
       opts
     end

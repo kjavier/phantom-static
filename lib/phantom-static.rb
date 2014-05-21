@@ -54,8 +54,10 @@ module PhantomStatic
     raise "No valid PhantomJS executable available" if (executable_location.nil? || executable_location.empty?)
     raise "A webpage must be specified" if (webpage.nil? || webpage.empty?)
     raise "A output must be specified" if (output.nil? || output.empty?)
+    switches = '--ignore-ssl-errors=true'
 
-    args = [bin, bridge_path, webpage, output, options.to_json]
+    args = [bin, switches, bridge_path, webpage, output, options.to_json]
+
 
     Open3.popen3(*args) do |stdin, stdout, stderr, thread|
       log.debug stdout.read()
