@@ -9,7 +9,6 @@ require 'tempfile'
 require 'active_support/all'
 
 module PhantomStatic
-  include ::Treecutter
 
   def self.config
     @config ||= Config.new
@@ -60,8 +59,6 @@ module PhantomStatic
 
 
     Open3.popen3(*args) do |stdin, stdout, stderr, thread|
-      log.debug stdout.read()
-      log.debug stderr.read()
     end
   end
 
