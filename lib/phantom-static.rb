@@ -57,9 +57,11 @@ module PhantomStatic
 
     args = [bin, switches, bridge_path, webpage, output, options.to_json]
 
-
     Open3.popen3(*args) do |stdin, stdout, stderr, thread|
+      Rails.logger.debug stdout.read()
+      Rails.logger.debug stderr.read()
     end
+    
   end
 
   def self.generate_random_file(format = :png)
