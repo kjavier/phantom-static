@@ -53,7 +53,7 @@ module PhantomStatic
     raise "No valid PhantomJS executable available" if (executable_location.nil? || executable_location.empty?)
     raise "A webpage must be specified" if (webpage.nil? || webpage.empty?)
     raise "A output must be specified" if (output.nil? || output.empty?)
-    switches = '--ignore-ssl-errors=true --ssl-protocol=any'
+    switches = '--ssl-protocol=any --ignore-ssl-errors=true '
 
     args = [bin, switches, bridge_path, webpage, output, options.to_json]
 
@@ -61,7 +61,7 @@ module PhantomStatic
       Rails.logger.debug stdout.read()
       Rails.logger.debug stderr.read()
     end
-    
+
   end
 
   def self.generate_random_file(format = :png)
