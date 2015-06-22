@@ -9,7 +9,6 @@ require 'tempfile'
 require 'active_support/all'
 
 module PhantomStatic
-  include ::Treecutter
 
   def self.config
     @config ||= Config.new
@@ -55,12 +54,13 @@ module PhantomStatic
     raise "A webpage must be specified" if (webpage.nil? || webpage.empty?)
     raise "A output must be specified" if (output.nil? || output.empty?)
 
-    args = [bin, bridge_path, webpage, output, options.to_json]
+    args = [bin, '--ssl-protocol=any', '--ignore-ssl-errors=true', bridge_path, webpage, output, options.to_json]
 
     Open3.popen3(*args) do |stdin, stdout, stderr, thread|
-      log.debug stdout.read()
-      log.debug stderr.read()
+      Rails.logger.debug stdout.read()
+      Rails.logger.debug stderr.read()
     end
+
   end
 
   def self.generate_random_file(format = :png)

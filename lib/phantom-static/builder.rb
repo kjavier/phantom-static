@@ -103,7 +103,7 @@ module PhantomStatic
       @custom_data
     end
 
-    # 
+    #
 
     # Query points used by Runner
 
